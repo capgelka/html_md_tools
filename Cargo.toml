@@ -1,0 +1,23 @@
+[package]
+name = "html_md_tools"
+version = "0.1.0"
+authors = ["capgelka <ldyach@yandex.ru>"]
+edition = "2018"
+
+[dependencies.reqwest]
+version = "^0.10"
+features = ["gzip", "blocking"]
+
+[dependencies]
+mdcat = "0.15"
+html2md = { git = "https://gitlab.com/Kanedias/html2md" }
+
+[dependencies.pulldown-cmark]
+version = "^0.6"
+default-features = false
+features = ['simd']
+
+[dependencies.syntect]
+version = "^3, <3.2"
+default-features = false
+features = ["parsing", "assets", "dump-load"]
