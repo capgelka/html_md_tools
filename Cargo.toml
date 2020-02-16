@@ -4,6 +4,10 @@ version = "0.1.0"
 authors = ["capgelka <ldyach@yandex.ru>"]
 edition = "2018"
 
+[lib]
+name = "html_md_tools"
+crate-type = ["rlib", "dylib", "staticlib"]
+
 [dependencies.reqwest]
 version = "^0.10"
 features = ["gzip", "blocking"]

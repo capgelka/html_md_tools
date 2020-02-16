@@ -1,5 +1,7 @@
+use std::ffi::CString;
 use std::error::Error;
 use std::io::{stdout};
+use std::ffi::CStr;
 
 use pulldown_cmark::{Options, Parser};
 use syntect::parsing::SyntaxSet;
@@ -42,9 +44,8 @@ pub fn print_html(html: &str) -> Result<(), Box<dyn Error>> {
 
 /// returns a pair of error code and error text
 #[no_mangle]
-pub fn print_html_ffi(html: &str) -> (u32, String) {
-    match print_html(html) {
-        Ok(_) => (0, "".to_string()),
-        Err(e) => (1, e.to_string())
-    }
+pub extern "C" fn print_html_ffi(data: CString) -> () {
+    println!("{:?}", "print_html_ffi called!");
+    let html = data.to_str().unwrap();
+    print_html(html).unwrap();
 }
