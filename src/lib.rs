@@ -1,4 +1,4 @@
-use std::ffi::CString;
+use std::os::raw::c_char;
 use std::error::Error;
 use std::io::{stdout};
 use std::ffi::CStr;
@@ -42,10 +42,9 @@ pub fn print_html(html: &str) -> Result<(), Box<dyn Error>> {
 }
 
 
-/// returns a pair of error code and error text
 #[no_mangle]
-pub extern "C" fn print_html_ffi(data: CString) -> () {
-    println!("{:?}", "print_html_ffi called!");
+pub extern "C" fn print_html_ffi(input: *const c_char) -> () {
+    let data: &CStr = unsafe { CStr::from_ptr(input) };
     let html = data.to_str().unwrap();
     print_html(html).unwrap();
 }
